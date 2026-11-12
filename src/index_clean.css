@@ -1,0 +1,543 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   Design tokens — tailored to the reference's light, minimal look
+   ============================================================ */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', ui-sans-serif, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-varsity: 'Graduate', 'Teko', ui-sans-serif, sans-serif;
+
+  --color-ink: #0b0b0f;
+  --color-ink-soft: #2a2a33;
+  --color-muted: #6b7280;
+  --color-faint: #9ca3af;
+  --color-line: #e8e8ec;
+  --color-line-strong: #d6d6dd;
+  --color-canvas: #ffffff;
+  --color-canvas-soft: #fafafa;
+
+  --color-brand-green: #15803d;
+  --color-brand-violet: #6d28d9;
+  --color-brand-orange: #d85a30;
+  --color-brand-yellow: #e7b938;
+  --color-brand-olive: #7f9f36;
+
+  --radius-card: 1rem;
+  --radius-pill: 999px;
+  --r-md: 14px;
+
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 2.5rem;
+  --sp-8: 3.5rem;
+  --sp-9: 4rem;
+
+  --shadow-soft: 0 1px 2px rgba(11, 11, 15, 0.04), 0 8px 24px -12px rgba(11, 11, 15, 0.12);
+  --shadow-lift: 0 2px 4px rgba(11, 11, 15, 0.05), 0 24px 48px -20px rgba(11, 11, 15, 0.22);
+
+  --animate-marquee: marquee 32s linear infinite;
+
+  /* Motion tokens (from base.css of reference) */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 160ms;
+  --dur-base: 320ms;
+  --dur-slow: 700ms;
+
+  /* Hero entrance keyframes */
+  @keyframes hero-in {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Welcome overlay keyframes */
+  @keyframes welcome-wipe {
+    to {
+      transform: translateY(-100%);
+      border-radius: 0 0 50% 50% / 0 0 8vh 8vh;
+    }
+  }
+
+  @keyframes welcome-word-out {
+    to {
+      opacity: 0;
+      transform: translateY(-24px);
+    }
+  }
+
+  /* Availability dot ring */
+  @keyframes dot-ring {
+    0% {
+      transform: scale(0.5);
+      opacity: 0.8;
+    }
+    70% {
+      transform: scale(1.4);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1.4);
+      opacity: 0;
+    }
+  }
+
+  /* Build motion cycles */
+  @keyframes build-fill-cycle {
+    0% {
+      clip-path: inset(0 100% 0 0);
+    }
+    5%,
+    20% {
+      clip-path: inset(0 0 0 0);
+    }
+    25%,
+    100% {
+      clip-path: inset(0 0 0 100%);
+    }
+  }
+
+  @keyframes build-text-cycle {
+    0%,
+    2% {
+      color: #1D191B;
+    }
+    7%,
+    22% {
+      color: #FFFFFF;
+    }
+    25%,
+    100% {
+      color: #1D191B;
+    }
+  }
+
+  @keyframes build-marker-cycle {
+    0%,
+    2% {
+      background: var(--tone);
+    }
+    7%,
+    22% {
+      background: color-mix(in srgb, var(--tone) 38%, #171315);
+    }
+    25%,
+    100% {
+      background: var(--tone);
+    }
+  }
+
+  @keyframes build-dot-cycle {
+    0%,
+    2% {
+      background: color-mix(in srgb, var(--tone) 36%, #171315);
+    }
+    7%,
+    22% {
+      background: var(--tone);
+    }
+    25%,
+    100% {
+      background: color-mix(in srgb, var(--tone) 36%, #171315);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-150%);
+    }
+    100% {
+      transform: translateX(150%);
+    }
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  ::selection {
+    background: rgba(109, 40, 217, 0.16);
+  }
+
+  /* ============================================================
+     Welcome overlay (session-scoped greeting, runs once per session)
+     ============================================================ */
+  .welcome-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: grid;
+    place-items: center;
+    background: var(--color-ink);
+    color: var(--color-canvas);
+    transition: opacity 0.2s ease;
+  }
+
+  .welcome-overlay.is-leaving {
+    animation: welcome-wipe 640ms var(--ease-out) forwards;
+  }
+
+  .welcome-overlay.is-leaving .welcome-word {
+    animation: welcome-word-out 300ms var(--ease-out) forwards;
+  }
+
+  .welcome-word {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+  }
+
+  .welcome-word::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-brand-green);
+    flex-shrink: 0;
+  }
+
+  /* ============================================================
+     Hero entrance (plays once after .hero-ready on <body>)
+     ============================================================ */
+  .hero-anim {
+    opacity: 0;
+    transform: translateY(30px);
+    will-change: opacity, transform;
+  }
+
+  .hero-ready .hero-anim {
+    animation: hero-in 800ms var(--ease-out) forwards;
+    animation-delay: var(--d, 0ms);
+  }
+
+  /* ============================================================
+     Availability dot ring
+     ============================================================ */
+  .dot-live {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-brand-green);
+    flex: none;
+  }
+
+  .dot-live::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid var(--color-brand-green);
+    animation: dot-ring 2.4s var(--ease-out) infinite;
+  }
+
+  /* ============================================================
+     Build motion rows (what I build stack)
+     ============================================================ */
+  .build-motion-row {
+    display: grid;
+    grid-template-columns: clamp(42px, 5vw, 58px) auto;
+    width: max-content;
+    max-width: 100%;
+    min-height: clamp(54px, 5.4vw, 68px);
+    overflow: hidden;
+    font-family: var(--font-display);
+    font-size: clamp(1.55rem, 2.5vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+
+  .build-motion-marker {
+    position: relative;
+    display: grid;
+    place-items: center;
+    background: var(--tone);
+    animation: build-marker-cycle 8s var(--ease-out) infinite;
+    animation-delay: var(--row-delay);
+  }
+
+  .build-motion-marker i {
+    width: clamp(14px, 1.7vw, 20px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--tone) 36%, #171315);
+    animation: build-dot-cycle 8s var(--ease-out) infinite;
+    animation-delay: var(--row-delay);
+  }
+
+  .build-motion-label {
+    position: relative;
+    display: grid;
+    place-items: center;
+    z-index: 0;
+    justify-items: start;
+    padding-inline: clamp(18px, 2.4vw, 28px);
+    white-space: nowrap;
+    color: #1D191B;
+    background: #FAF9F9;
+    animation: build-text-cycle 8s var(--ease-out) infinite;
+    animation-delay: var(--row-delay);
+  }
+
+  .build-motion-label::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--tone);
+    clip-path: inset(0 100% 0 0);
+    animation: build-fill-cycle 8s var(--ease-out) infinite;
+    animation-delay: var(--row-delay);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-violet);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* ============================================================
+   Hero layout (from home.css of reference)
+   ============================================================ */
+@utility hero-inner {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: var(--sp-4);
+  padding-block: var(--sp-6);
+}
+
+@utility hero-content {
+  max-width: 680px;
+  display: grid;
+  gap: var(--sp-4);
+  justify-items: start;
+}
+
+@utility hero-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  align-items: center;
+  gap: var(--sp-8);
+}
+
+@utility hero-illustration {
+  width: 100%;
+}
+
+@utility hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  background: #E4F6F0;
+  color: #085041;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+@utility hero-title {
+  font-size: clamp(2.2rem, 1.3rem + 3.4vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: 0.02em;
+  text-wrap: initial;
+}
+
+@utility hero-sub {
+  font-size: 1.05rem;
+  max-width: 46ch;
+}
+
+@utility hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+@utility hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-7);
+  width: 100%;
+  padding-top: var(--sp-6);
+  padding-bottom: var(--sp-5);
+  border-top: 1px solid var(--color-line);
+}
+
+@utility stats-section {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-5);
+    padding-top: var(--sp-6);
+    padding-bottom: var(--sp-6);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-stats {
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+    padding-top: var(--sp-5);
+    padding-bottom: var(--sp-5);
+  }
+}
+
+@utility build-motion {
+  width: min(100%, 430px);
+  justify-self: end;
+  padding: clamp(2rem, 4vw, 3.25rem) clamp(1.5rem, 3vw, 2.5rem);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--r-md);
+  background: #1D191B;
+  box-shadow: var(--shadow-lift);
+}
+
+@utility build-motion-list {
+  display: grid;
+  gap: 10px;
+  align-items: start;
+}
+
+/* ============================================================
+   Varsity / Collegiate Athletic Typography — condensed athletic block
+   ============================================================ */
+@utility heading-varsity {
+  font-family: var(--font-varsity);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+@utility text-outline {
+  -webkit-text-stroke: 2px rgba(23, 23, 23, 0.15);
+  text-stroke: 2px rgba(23, 23, 23, 0.15);
+  text-shadow:
+    1px 1px 0px rgba(23, 23, 23, 0.1),
+    2px 2px 0px rgba(23, 23, 23, 0.05);
+}
+
+/* Color treatments for varsity headings */
+@utility text-primary {
+  color: #171717;
+}
+
+@utility text-highlight-green {
+  color: #159653;
+}
+
+@utility text-highlight-purple {
+  color: #7059F5;
+}
+
+/* Varsity heading sizes - hierarchy */
+@utility heading-hero {
+  font-size: clamp(40px, 7vw, 56px);
+}
+
+@utility heading-h1 {
+  font-size: clamp(28px, 4.5vw, 36px);
+}
+
+@utility heading-h2 {
+  font-size: clamp(22px, 3.5vw, 28px);
+}
+
+@utility heading-h3 {
+  font-size: clamp(18px, 3vw, 20px);
+}
+
+/* Subheading (smaller varsity for card titles) */
+@utility heading-sub {
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+/* Eyebrow with varsity style */
+@utility eyebrow-varsity {
+  font-family: var(--font-varsity);
+  font-weight: 800;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #7059F5;
+}

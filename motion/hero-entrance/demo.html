@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motion Transplant Sandbox — hero-entrance</title>
+  <style>
+    /* ===== Design tokens (from base.css) ===== */
+    :root {
+      --bg: #FFFFFF;
+      --text: #18181B;
+      --text-2: #52525B;
+      --text-3: #8B8B93;
+      --line: rgba(9, 9, 11, 0.10);
+      --line-strong: rgba(9, 9, 11, 0.20);
+      --accent: #D85A30;
+      --ok: #1D9E75;
+      --hl-green: #3FA37B;
+      --hl-violet: #6C5CE7;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --dur-fast: 160ms;
+      --dur-base: 320ms;
+      --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+      --font-body: "Inter", system-ui, -apple-system, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+      --fs-hero: clamp(2.6rem, 1.2rem + 6.2vw, 5.4rem);
+      --sp-3: 0.75rem;
+      --sp-4: 1rem;
+      --sp-5: 1.5rem;
+      --sp-6: 2rem;
+      --sp-7: 3rem;
+      --r-md: 14px;
+      --r-lg: 22px;
+      --r-full: 999px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100dvh;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    h1 { font-size: var(--fs-hero); font-weight: 400; letter-spacing: 0.02em; text-wrap: initial; }
+    p { color: var(--text-2); max-width: 46ch; }
+    a, button { color: inherit; text-decoration: none; cursor: pointer; font: inherit; }
+
+    /* ===== Welcome overlay (session-scoped, runs once) ===== */
+    .welcome-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      display: grid;
+      place-items: center;
+      background: var(--text);
+      color: var(--bg);
+    }
+    .welcome-word {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 5vw, 3.4rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+    }
+    .welcome-word::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--ok);
+      flex-shrink: 0;
+    }
+    .welcome-overlay.is-leaving {
+      animation: welcome-wipe 640ms var(--ease-out) forwards;
+    }
+    .welcome-overlay.is-leaving .welcome-word {
+      animation: welcome-word-out 300ms var(--ease-out) forwards;
+    }
+    @keyframes welcome-wipe {
+      to { transform: translateY(-100%); border-radius: 0 0 50% 50% / 0 0 8vh 8vh; }
+    }
+    @keyframes welcome-word-out {
+      to { opacity: 0; transform: translateY(-24px); }
+    }
+
+    /* ===== Hero entrance (plays once after .hero-ready on body) ===== */
+    .hero {
+      position: relative;
+      min-height: calc(100dvh - 72px);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding-block: var(--sp-7);
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.8fr);
+      align-items: center;
+      gap: clamp(2rem, 5vw, 3rem);
+      max-width: 1180px;
+      margin-inline: auto;
+      padding-inline: var(--sp-4);
+    }
+    .hero-content { max-width: 680px; display: grid; gap: var(--sp-5); justify-items: start; }
+
+    /* hero-anim is the opt-in class; --d is the inline delay */
+    .hero-anim {
+      opacity: 0;
+      transform: translateY(30px);
+      will-change: opacity, transform;
+    }
+    .hero-ready .hero-anim {
+      animation: hero-in 800ms var(--ease-out) forwards;
+      animation-delay: var(--d, 0ms);
+    }
+    @keyframes hero-in {
+      to { opacity: 1; transform: none; }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.28rem 0.7rem;
+      border-radius: var(--r-full);
+      border: 1px solid transparent;
+      background: #E4F6F0;
+      color: #085041;
+      font-size: 0.8125rem;
+      font-weight: 500;
+    }
+    .dot-live {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--ok);
+      position: relative;
+    }
+    .dot-live::after {
+      content: ""; position: absolute; inset: -4px;
+      border-radius: 50%; border: 1px solid var(--ok);
+      animation: dot-ring 2.4s var(--ease-out) infinite;
+    }
+    @keyframes dot-ring {
+      0% { transform: scale(0.5); opacity: 0.8; }
+      70% { transform: scale(1.4); opacity: 0; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+
+    .hl-green { color: var(--hl-green); }
+    .hl-violet { color: var(--hl-violet); }
+
+    .hero-sub { font-size: 1.05rem; }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-2);
+      padding: 0.7rem 1.35rem;
+      border-radius: var(--r-full);
+      font-size: 0.875rem;
+      font-weight: 600;
+      line-height: 1;
+      border: 1px solid transparent;
+      transition: transform var(--dur-fast) var(--ease-out),
+                  background var(--dur-fast) var(--ease-out),
+                  border-color var(--dur-fast) var(--ease-out),
+                  box-shadow var(--dur-fast) var(--ease-out);
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary { background: var(--text); color: var(--bg); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px -8px rgba(9, 9, 11, 0.14); }
+    .btn-ghost { border-color: var(--line-strong); color: var(--text); background: transparent; }
+    .btn-ghost:hover { border-color: var(--text); transform: translateY(-2px); }
+    .arrow { display: inline-block; transition: transform var(--dur-fast) var(--ease-out); }
+    .btn:hover .arrow { transform: translate(3px, -3px); }
+
+    .link-draw {
+      position: relative;
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-color: var(--line-strong);
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+      transition: text-decoration-color 0.2s var(--ease-out);
+    }
+    .link-draw:hover { text-decoration-color: var(--hl-violet); }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      gap: var(--sp-5) var(--sp-6);
+      margin-top: var(--sp-3);
+      padding-top: var(--sp-5);
+      border-top: 1px solid var(--line);
+      width: 100%;
+    }
+    .hero-stats dt {
+      font-size: 0.75rem;
+      color: var(--text-3);
+      order: 2;
+    }
+    .hero-stats dd {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      order: 1;
+    }
+
+    .build-motion {
+      width: min(100%, 430px);
+      justify-self: end;
+      padding: clamp(2rem, 4vw, 3.25rem) clamp(1.5rem, 3vw, 2.5rem);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--r-lg);
+      background: #1D191B;
+      box-shadow: 0 24px 60px -20px rgba(9, 9, 11, 0.24);
+    }
+    .build-motion-list { display: grid; gap: 10px; align-items: start; }
+    .build-motion-row {
+      display: grid;
+      grid-template-columns: clamp(42px, 5vw, 58px) auto;
+      width: max-content;
+      max-width: 100%;
+      min-height: clamp(54px, 5.4vw, 68px);
+      overflow: hidden;
+      font-family: var(--font-display);
+      font-size: clamp(1.55rem, 2.5vw, 2.25rem);
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.035em;
+    }
+    .build-motion-row:first-child { margin-left: clamp(22px, 4vw, 48px); }
+    .build-motion-marker, .build-motion-label {
+      position: relative; display: grid; place-items: center;
+    }
+    .build-motion-marker { background: var(--tone); }
+    .build-motion-marker i {
+      width: clamp(14px, 1.7vw, 20px); aspect-ratio: 1;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--tone) 36%, #171315);
+    }
+    .build-motion-label {
+      z-index: 0; justify-items: start;
+      padding-inline: clamp(18px, 2.4vw, 28px);
+      white-space: nowrap;
+      color: #1D191B; background: #FAF9F9;
+    }
+    .build-motion-label::before {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background: var(--tone); clip-path: inset(0 100% 0 0);
+    }
+
+    .scroll-cue {
+      position: absolute;
+      left: 50%; bottom: var(--sp-5);
+      transform: translateX(-50%);
+      z-index: 1;
+      display: grid; place-items: center;
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--line-strong);
+      color: var(--text-2);
+      transition: transform var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+    }
+    .scroll-cue:hover { transform: translateX(-50%) translateY(3px); color: var(--text); }
+
+    /* ===== Reduced motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-anim, [data-reveal], [data-reveal-stagger] > * {
+        opacity: 1 !important; transform: none !important;
+        animation: none !important; transition: none !important;
+      }
+      .welcome-overlay { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#main" class="skip-link" style="position:absolute;top:-100%;left:1rem;z-index:501;padding:0.5rem 1rem;background:var(--text);color:var(--bg);border-radius:8px;font-size:0.875rem;font-weight:600;">Skip to content</a>
+
+  <!-- Welcome overlay (session-scoped) -->
+  <div class="welcome-overlay" id="welcomeOverlay" aria-hidden="true">
+    <div class="welcome-word" id="welcomeWord">Welcome</div>
+  </div>
+
+  <main id="main">
+    <section class="hero" id="home" aria-label="Introduction">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <span class="hero-anim hero-badge" style="--d: 100ms">
+            <span class="dot-live" aria-hidden="true"></span>
+            Available for freelance &amp; internships
+          </span>
+
+          <h1 class="hero-anim" style="--d: 220ms">
+            Building <span class="hl-green">fast</span>,<br>
+            <span class="hl-violet">secure</span> web things.
+          </h1>
+
+          <p class="hero-anim hero-sub text-2" style="--d: 340ms">
+            Full-stack engineer shipping production apps. Currently building
+            <a href="#" class="link-draw" target="_blank" rel="noopener noreferrer">PrivacyTestLab</a>
+            — browser privacy testing done right.
+          </p>
+
+          <div class="hero-actions hero-anim" style="--d: 460ms">
+            <button class="btn btn-primary">View my work <span class="arrow">↗</span></button>
+            <button class="btn btn-ghost">Resume</button>
+          </div>
+
+          <dl class="hero-stats hero-anim" style="--d: 580ms">
+            <div><dt>Shipped projects</dt><dd>0</dd></div>
+            <div><dt>DSA problems solved</dt><dd>200+</dd></div>
+            <div><dt>Public repos</dt><dd>—</dd></div>
+          </dl>
+        </div>
+
+        <aside class="build-motion hero-anim" style="--d: 420ms" aria-label="What I build">
+          <ul class="build-motion-list">
+            <li class="build-motion-row" style="--tone: #6C5CE7; --row-delay: 0s">
+              <span class="build-motion-marker" aria-hidden="true"><i></i></span>
+              <span class="build-motion-label">Web Apps</span>
+            </li>
+            <li class="build-motion-row" style="--tone: #D85A30; --row-delay: 2s">
+              <span class="build-motion-marker" aria-hidden="true"><i></i></span>
+              <span class="build-motion-label">Privacy Tools</span>
+            </li>
+            <li class="build-motion-row" style="--tone: #E7B938; --row-delay: 4s">
+              <span class="build-motion-marker" aria-hidden="true"><i></i></span>
+              <span class="build-motion-label">APIs</span>
+            </li>
+            <li class="build-motion-row" style="--tone: #7F9F36; --row-delay: 6s">
+              <span class="build-motion-marker" aria-hidden="true"><i></i></span>
+              <span class="build-motion-label">Open Source</span>
+            </li>
+          </ul>
+        </aside>
+      </div>
+
+      <a href="#open-source" class="scroll-cue hero-anim" style="--d: 800ms" aria-label="Scroll to next section">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 16l-4-4 4-4m0 8v-8"/></svg>
+      </a>
+    </section>
+  </main>
+
+  <script>
+    /* ===== Session-scoped welcome ===== */
+    const KEY = 'welcomeShown';
+    const overlay = document.getElementById('welcomeOverlay');
+    const body = document.body;
+
+    if (sessionStorage.getItem(KEY)) {
+      // Already shown this session — skip overlay, go straight to hero-ready
+      overlay.style.display = 'none';
+      body.classList.add('hero-ready');
+    } else {
+      // Show overlay, then exit + trigger hero entrance
+      sessionStorage.setItem(KEY, '1');
+      setTimeout(() => {
+        overlay.classList.add('is-leaving');
+        setTimeout(() => {
+          overlay.style.display = 'none';
+          body.classList.add('hero-ready');
+        }, 640); // matches welcome-wipe duration
+      }, 1200); // overlay dwell time before exit
+    }
+
+    /* Reset for testing: uncomment next line to re-see the animation */
+    // sessionStorage.removeItem(KEY);
+  </script>
+</body>
+</html>

@@ -1,0 +1,1414 @@
+/* ============================================================
+   About Page — Spacing System
+   ============================================================ */
+:root {
+  --space-xs: 4px;    /* 4px  */
+  --space-sm: 8px;    /* 8px  */
+  --space-md: 16px;   /* 16px */
+  --space-lg: 24px;   /* 24px */
+  --space-xl: 32px;   /* 32px */
+  --space-2xl: 48px;  /* 48px */
+  --space-3xl: 64px;  /* 64px */
+  --space-4xl: 96px;  /* 96px */
+}
+
+/* ============================================================
+   About Page — Card Base Styles
+   ============================================================ */
+.card-base {
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  border-radius: 16px;
+  padding: 32px;
+  transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+}
+
+.card-base:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08);
+  border-color: #D8D8D8;
+}
+
+/* ============================================================
+   About Page — Hero Section
+   ============================================================ */
+.about-hero-section {
+  padding-top: 96px;
+  padding-bottom: 96px;
+}
+
+.about-hero-inner {
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: 32px;
+}
+
+.about-hero-card {
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  border-radius: 24px;
+  padding: 64px;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 64px;
+  align-items: start;
+}
+
+.about-hero-content {
+  min-width: 0;
+}
+
+.about-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #7059F5;
+  margin-bottom: 16px;
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  background: #7059F5;
+  border-radius: 50%;
+}
+
+.about-hero-name {
+  font-family: var(--font-varsity);
+  font-weight: 800;
+  font-size: clamp(56px, 6vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #171717;
+  margin: 0 0 12px;
+  text-wrap: balance;
+  -webkit-text-stroke: 2px rgba(23, 23, 23, 0.15);
+  text-stroke: 2px rgba(23, 23, 23, 0.15);
+}
+
+.about-hero-role {
+  font-family: var(--font-sans);
+  font-size: clamp(20px, 2vw, 24px);
+  font-weight: 500;
+  color: #62636D;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.about-hero-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: #62636D;
+  margin-bottom: 24px;
+}
+
+.location-icon {
+  font-size: 1rem;
+}
+
+.about-hero-description {
+  margin-bottom: 32px;
+}
+
+.about-hero-description p {
+  font-size: clamp(18px, 1.4vw, 20px);
+  line-height: 1.7;
+  color: #62636D;
+  margin: 0 0 16px;
+  max-width: 100%;
+}
+
+.about-hero-description p:last-child {
+  margin-bottom: 0;
+}
+
+.about-hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Image Wrapper - Right Column */
+.about-hero-image-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.about-hero-image-container {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #E5E5E5;
+  background: #FAFAFA;
+  box-shadow: 0 4px 24px -8px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.about-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.4s ease;
+}
+
+.about-hero-image-container:hover .about-hero-image {
+  transform: scale(1.03);
+}
+
+/* Profile Image Upload */
+.profile-image-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.profile-upload-btn {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  border-radius: 12px;
+  color: #62636D;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.about-hero-image-container:hover .profile-upload-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.profile-upload-btn:hover {
+  background: #FAFAFA;
+  border-color: #D8D8D8;
+  color: #7059F5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.profile-upload-btn:focus-visible {
+  opacity: 1;
+  transform: translateY(0);
+  outline: 2px solid #7059F5;
+  outline-offset: 2px;
+}
+
+.profile-upload-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.profile-upload-btn:hover svg {
+  transform: rotate(15deg);
+}
+
+.profile-upload-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.profile-upload-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #E5E5E5;
+  border-top-color: #7059F5;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Admin Mode Indicator */
+.admin-mode-indicator {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  background: #171717;
+  color: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.admin-mode-indicator kbd {
+  background: #FFFFFF;
+  color: #171717;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  margin: 0 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Social Links Below Image */
+.about-hero-social {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  border-radius: 12px;
+  color: #171717;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.social-link:hover {
+  background: #FAFAFA;
+  border-color: #D8D8D8;
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.1);
+}
+
+.social-icon {
+  flex-shrink: 0;
+  color: #62636D;
+  transition: color 0.2s ease;
+}
+
+.social-link:hover .social-icon {
+  color: #7059F5;
+}
+
+.social-label {
+  font-weight: 500;
+}
+
+/* Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 1.75rem;
+  border-radius: 9999px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-icon {
+  flex-shrink: 0;
+}
+
+.btn-primary {
+  background: #171717;
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background: #2a2a2a;
+  box-shadow: 0 4px 12px rgba(23, 23, 23, 0.2);
+}
+
+.btn-secondary {
+  background: #FFFFFF;
+  color: #171717;
+  border: 1px solid #E5E5E5;
+}
+
+.btn-secondary:hover {
+  border-color: #62636D;
+  background-color: #FAFAFA;
+}
+
+.btn-accent {
+  background: #E8522B;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 0 2rem;
+}
+
+.btn-accent:hover {
+  background: #C44118;
+  box-shadow: 0 4px 12px rgba(232, 82, 43, 0.3);
+}
+
+/* ============================================================
+   About Page — Section Headers
+   ============================================================ */
+.section-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #62636D;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section-title {
+  font-family: var(--font-varsity);
+  font-weight: 800;
+  font-size: clamp(32px, 4vw, 42px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: #171717;
+  margin: 0;
+}
+
+/* ============================================================
+   About Page — Story Section
+   ============================================================ */
+.about-story-section {
+  padding-top: 64px;
+  padding-bottom: 96px;
+}
+
+.story-card {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 20px;
+  padding: 48px;
+}
+
+.story-content {
+  margin-bottom: 32px;
+}
+
+.story-paragraph {
+  font-size: clamp(19px, 1.4vw, 21px);
+  line-height: 1.8;
+  color: #62636D;
+  margin: 0 0 20px;
+}
+
+.story-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.story-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding-top: 32px;
+  border-top: 1px solid #E5E5E5;
+}
+
+.highlight-item {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: #FAFAFA;
+  border: 1px solid #E5E5E5;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.highlight-item:hover {
+  border-color: #D8D8D8;
+  background: #FFFFFF;
+}
+
+.highlight-icon {
+  flex-shrink: 0;
+  color: #7059F5;
+  margin-top: 2px;
+}
+
+.highlight-title {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #171717;
+  margin-bottom: 4px;
+}
+
+.highlight-desc {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #62636D;
+}
+
+/* ============================================================
+   About Page — Experience Cards
+   ============================================================ */
+.experience-section {
+  padding-top: 64px;
+  padding-bottom: 96px;
+}
+
+.experience-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 24px;
+}
+
+.experience-card {
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.experience-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.experience-year {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #7059F5;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.experience-role-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.experience-role {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #171717;
+  margin: 0 0 4px;
+  line-height: 1.3;
+}
+
+.experience-org {
+  font-size: 1rem;
+  color: #62636D;
+  margin: 0;
+}
+
+.experience-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.experience-duration {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #62636D;
+}
+
+.experience-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #62636D;
+  margin: 0;
+  flex: 1;
+}
+
+.experience-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.tech-pill {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #7059F5;
+  background: #F0F4FF;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  border: 1px solid #E0E7FF;
+  transition: all 0.2s ease;
+}
+
+.tech-pill:hover {
+  background: #7059F5;
+  color: #FFFFFF;
+  border-color: #7059F5;
+}
+
+.experience-link {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #7059F5;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.experience-link:hover {
+  color: #169B70;
+  text-decoration-color: #169B70;
+}
+
+/* ============================================================
+   About Page — Education Cards
+   ============================================================ */
+.education-section {
+  padding-top: 64px;
+  padding-bottom: 96px;
+}
+
+.education-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.education-card {
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  min-height: 180px;
+}
+
+.education-card-icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F0F4FF;
+  border: 1px solid #E0E7FF;
+  border-radius: 14px;
+  color: #7059F5;
+}
+
+.education-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.education-year {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #62636D;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.education-institution {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #171717;
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+
+.education-qualification {
+  font-size: 1rem;
+  color: #7059F5;
+  font-weight: 500;
+  margin: 0 0 8px;
+}
+
+.education-description {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #62636D;
+  margin: 0;
+}
+
+/* ============================================================
+   About Page — Technology Stack Cards
+   ============================================================ */
+.tech-stack-section {
+  padding-top: 64px;
+  padding-bottom: 96px;
+}
+
+.stack-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.stack-card {
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.stack-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.stack-icon {
+  flex-shrink: 0;
+  color: #7059F5;
+}
+
+.stack-category-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #171717;
+  margin: 0;
+}
+
+.stack-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex: 1;
+}
+
+.stack-item {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #62636D;
+  background: #FAFAFA;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid #E5E5E5;
+  transition: all 0.2s ease;
+}
+
+.stack-item:hover {
+  background: #169B70;
+  color: #FFFFFF;
+  border-color: #169B70;
+}
+
+/* ============================================================
+   About Page — Philosophy Cards
+   ============================================================ */
+.philosophy-section {
+  padding-top: 64px;
+  padding-bottom: 96px;
+}
+
+.philosophy-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.philosophy-card {
+  border-radius: 20px;
+  padding: 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 220px;
+}
+
+.philosophy-number {
+  font-family: var(--font-varsity);
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #D85A30;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.philosophy-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #171717;
+  margin: 0 0 12px;
+  line-height: 1.3;
+}
+
+.philosophy-description {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #62636D;
+  margin: 0;
+  flex: 1;
+}
+
+/* ============================================================
+   About Page — Contact Section
+   ============================================================ */
+.contact-section {
+  padding-top: 64px;
+  padding-bottom: 120px;
+}
+
+.contact-card {
+  max-width: 720px;
+  margin: 0 auto;
+  border-radius: 24px;
+  padding: 64px 48px;
+  text-align: center;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FAFAFA 100%);
+}
+
+.contact-content {
+  margin-bottom: 32px;
+}
+
+.contact-title {
+  font-family: var(--font-varsity);
+  font-weight: 800;
+  font-size: clamp(32px, 4vw, 42px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: #171717;
+  margin: 12px 0 16px;
+}
+
+.contact-sub {
+  font-size: clamp(18px, 1.5vw, 20px);
+  line-height: 1.6;
+  color: #62636D;
+  margin: 0;
+  max-width: 500px;
+  margin-inline: auto;
+}
+
+.contact-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.contact-form {
+  width: 100%;
+  text-align: left;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.form-field {
+  margin-bottom: 24px;
+}
+
+.form-field:last-child {
+  margin-bottom: 0;
+}
+
+.field-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #62636D;
+  margin-bottom: 8px;
+}
+
+.field-input,
+.field-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #E5E5E5;
+  background: #FAFAFA;
+  color: #171717;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+  box-sizing: border-box;
+}
+
+.field-input:focus,
+.field-textarea:focus {
+  outline: none;
+  border-color: #169B70;
+  box-shadow: 0 0 0 3px rgba(22, 155, 112, 0.15);
+  background: #FFFFFF;
+}
+
+.field-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* ============================================================
+   About Page — Button Styles
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 1.75rem;
+  border-radius: 9999px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-icon {
+  flex-shrink: 0;
+}
+
+.btn-primary {
+  background: #171717;
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background: #2a2a2a;
+  box-shadow: 0 4px 12px rgba(23, 23, 23, 0.2);
+}
+
+.btn-secondary {
+  background: #FFFFFF;
+  color: #171717;
+  border: 1px solid #E5E5E5;
+}
+
+.btn-secondary:hover {
+  border-color: #62636D;
+  background-color: #FAFAFA;
+}
+
+.btn-accent {
+  background: #E8522B;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 0 2rem;
+}
+
+.btn-accent:hover {
+  background: #C44118;
+  box-shadow: 0 4px 12px rgba(232, 82, 43, 0.3);
+}
+
+/* ============================================================
+   About Page — What Im Up To Section (keep existing)
+   ============================================================ */
+.what-im-up-to-section {
+  padding-top: 64px;
+  padding-bottom: 96px;
+}
+
+.what-im-up-to-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.what-im-up-to-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #62636D;
+}
+
+.what-im-up-to-heading {
+  font-family: var(--font-varsity);
+  font-weight: 800;
+  font-size: clamp(28px, 4vw, 36px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #171717;
+  margin: 0;
+}
+
+.what-im-up-to-sub {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #62636D;
+  margin: 0;
+}
+
+.what-im-up-to-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.what-im-up-to-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  padding: 36px;
+  border: 1px solid #E5E5E5;
+  border-radius: 28px;
+  background: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+}
+
+.what-im-up-to-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08);
+  border-color: #D8D8D8;
+}
+
+.card-header {
+  margin-bottom: 16px;
+}
+
+.card-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #7059F5;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.card-title {
+  font-size: 1.4375rem;
+  font-weight: 600;
+  color: #171717;
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.card-description {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #62636D;
+  margin: 0 0 16px;
+}
+
+.card-status {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7059F5;
+  margin-bottom: 16px;
+}
+
+.card-content .link-draw {
+  font-size: 0.875rem;
+}
+
+.what-im-up-to-card.clock-card {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.clock-display {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.clock-icon {
+  color: #62636D;
+  flex-shrink: 0;
+}
+
+.clock-time {
+  font-family: var(--font-mono);
+  font-size: clamp(36px, 5vw, 48px);
+  font-weight: 700;
+  color: #171717;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.timezone {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #62636D;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  align-self: flex-end;
+  margin-bottom: 4px.
+}
+
+.clock-description {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #62636D;
+  margin: 0;
+}
+
+/* Responsive Breakpoints for What Im Up To */
+@media (max-width: 1024px) {
+  .what-im-up-to-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .what-im-up-to-card {
+    min-height: 180px;
+    padding: 28px;
+  }
+
+  .clock-time {
+    font-size: clamp(32px, 5vw, 42px);
+  }
+}
+
+@media (max-width: 768px) {
+  .what-im-up-to-section {
+    padding-top: 48px;
+    padding-bottom: 64px;
+  }
+
+  .what-im-up-to-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .what-im-up-to-card {
+    min-height: 160px;
+    padding: 24px;
+  }
+
+  .clock-time {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+}
+
+/* ============================================================
+   Responsive — About Page
+   ============================================================ */
+@media (max-width: 1024px) {
+  .about-hero-card {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 56px;
+    max-width: 720px;
+    margin-inline: auto;
+  }
+
+  .about-hero-image-wrapper {
+    order: -1;
+  }
+
+  .about-hero-image-container {
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  .about-hero-social {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  .social-link {
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .experience-cards,
+  .education-cards,
+  .stack-cards,
+  .philosophy-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .story-highlights {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-card {
+    padding: 48px 32px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-hero-section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .about-hero-card {
+    padding: 32px 24px;
+    border-radius: 16px;
+    gap: 32px;
+  }
+
+  .about-hero-name {
+    font-size: clamp(36px, 8vw, 48px);
+  }
+
+  .about-hero-role {
+    font-size: clamp(16px, 4vw, 18px);
+  }
+
+  .about-hero-actions {
+    flex-direction: column;
+  }
+
+  .about-hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .about-hero-image-container {
+    max-width: 340px;
+  }
+
+  .about-hero-social {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .social-link {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .about-story-section {
+    padding-top: 48px;
+    padding-bottom: 64px;
+  }
+
+  .story-card {
+    padding: 32px 24px;
+    border-radius: 16px;
+  }
+
+  .story-paragraph {
+    font-size: clamp(16px, 4vw, 18px);
+  }
+
+  .story-highlights {
+    grid-template-columns: 1fr;
+    gap: 16px.
+  }
+
+  .highlight-item {
+    padding: 16px.
+  }
+
+  .experience-section,
+  .education-section,
+  .tech-stack-section,
+  .philosophy-section,
+  .contact-section {
+    padding-top: 48px.
+    padding-bottom: 64px.
+  }
+
+  .section-title {
+    font-size: clamp(26px, 5vw, 32px).
+  }
+
+  .experience-cards,
+  .education-cards,
+  .stack-cards,
+  .philosophy-cards {
+    grid-template-columns: 1fr.
+    gap: 20px.
+  }
+
+  .experience-card {
+    padding: 24px.
+  }
+
+  .experience-card-header {
+    gap: 16px.
+  }
+
+  .experience-year {
+    font-size: 1.25rem.
+  }
+
+  .education-card {
+    padding: 24px.
+    flex-direction: column.
+    align-items: flex-start.
+    gap: 16px.
+  }
+
+  .education-card-icon {
+    width: 48px.
+    height: 48px.
+  }
+
+  .stack-card {
+    padding: 24px.
+  }
+
+  .philosophy-card {
+    padding: 24px.
+    min-height: auto.
+  }
+
+  .philosophy-number {
+    font-size: 2rem.
+  }
+
+  .contact-card {
+    padding: 40px 24px.
+    border-radius: 16px.
+  }
+
+  .contact-actions {
+    flex-direction: column.
+    align-items: center.
+  }
+
+  .contact-actions .btn {
+    width: 100%.
+    justify-content: center.
+  }
+
+  .form-row {
+    grid-template-columns: 1fr.
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero-card {
+    padding: 24px 20px;
+  }
+
+  .story-card {
+    padding: 24px 20px;
+  }
+
+  .experience-card,
+  .education-card,
+  .stack-card,
+  .philosophy-card {
+    padding: 20px;
+  }
+
+  .contact-card {
+    padding: 32px 20px;
+  }
+}
+
+@media print {
+  .about-hero-section,
+  .about-story-section,
+  .what-im-up-to-section,
+  .experience-section,
+  .education-section,
+  .tech-stack-section,
+  .philosophy-section,
+  .contact-section {
+    page-break-inside: avoid;
+  }
+
+  .card-base:hover,
+  .experience-card:hover,
+  .education-card:hover,
+  .stack-card:hover,
+  .philosophy-card:hover,
+  .what-im-up-to-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}

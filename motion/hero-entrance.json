@@ -1,0 +1,73 @@
+{
+  "id": "hero-entrance",
+  "source": "https://bdnath.xyz/",
+  "section": "Hero",
+  "captured": "2026-11-12",
+  "trigger": "load",
+  "sessionScoped": true,
+  "runsOncePerSession": true,
+  "precededBy": {
+    "name": "welcome overlay exit",
+    "animations": [
+      { "name": "welcome-wipe", "durationMs": 640, "ease": "cubic-bezier(0.22, 1, 0.36, 1)", "finalTransform": "translateY(-100%) border-radius(0 0 50% 50% / 0 0 8vh 8vh)" },
+      { "name": "welcome-word-out", "durationMs": 300, "ease": "cubic-bezier(0.22, 1, 0.36, 1)", "finalOpacity": 0, "finalTransform": "translateY(-24px)" }
+    ]
+  },
+  "tokens": {
+    "easeOut": "cubic-bezier(0.22, 1, 0.36, 1)",
+    "durFast": "160ms",
+    "durBase": "320ms",
+    "durSlow": "700ms",
+    "fontDisplay": "\"Space Grotesk\", \"Inter\", system-ui, sans-serif",
+    "bg": "#FFFFFF",
+    "text": "#18181B",
+    "accent": "#D85A30",
+    "ok": "#1D9E75",
+    "hlGreen": "#3FA37B",
+    "hlViolet": "#6C5CE7"
+  },
+  "initialState": {
+    "selector": ".hero-anim",
+    "opacity": 0,
+    "transform": "translateY(30px)"
+  },
+  "finalState": {
+    "selector": ".hero-ready .hero-anim",
+    "opacity": 1,
+    "transform": "none",
+    "animationName": "hero-in",
+    "animationDuration": "800ms",
+    "animationTimingFunction": "cubic-bezier(0.22, 1, 0.36, 1)",
+    "animationFillMode": "forwards",
+    "animationDelay": "var(--d, 0ms)"
+  },
+  "keyframes": {
+    "hero-in": {
+      "from": { "opacity": 0, "transform": "translateY(30px)" },
+      "to": { "opacity": 1, "transform": "none" }
+    }
+  },
+  "items": [
+    { "target": "availability badge", "delayMs": 100, "confidence": "measured" },
+    { "target": "headline", "delayMs": 220, "confidence": "measured" },
+    { "target": "subtitle", "delayMs": 340, "confidence": "measured" },
+    { "target": "build-motion aside", "delayMs": 420, "confidence": "measured" },
+    { "target": "CTA actions", "delayMs": 460, "confidence": "measured" },
+    { "target": "stats strip", "delayMs": 580, "confidence": "measured" },
+    { "target": "scroll cue", "delayMs": 800, "confidence": "measured" }
+  ],
+  "microInteractions": [
+    { "name": "arrow nudge", "trigger": "hover", "transform": "translate(3px, -3px)", "duration": "160ms", "ease": "cubic-bezier(0.22, 1, 0.36, 1)" },
+    { "name": "link draw underline", "trigger": "hover", "property": "scaleX", "from": 0, "to": 1, "origin": "right -> left", "duration": "320ms", "ease": "cubic-bezier(0.22, 1, 0.36, 1)" },
+    { "name": "button active", "trigger": "active", "transform": "scale(0.97)", "duration": "160ms", "ease": "cubic-bezier(0.22, 1, 0.36, 1)" }
+  ],
+  "reducedMotion": {
+    "appliesTo": [".hero-anim", "[data-reveal]", "[data-reveal-stagger] > *"],
+    "overrides": { "opacity": "1", "transform": "none", "animation": "none", "transition": "none" }
+  },
+  "confidenceNotes": [
+    "All durations, easings, transforms, and delays taken directly from source CSS (animations.css, base.css) — measured",
+    "Welcome overlay session gating logic not inspected live — inferred",
+    "No live browser sampling performed — no __motion / __fit data captured"
+  ]
+}
