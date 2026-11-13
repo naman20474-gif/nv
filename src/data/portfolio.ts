@@ -313,7 +313,7 @@ export const portfolioData: PortfolioData = {
     email: 'naman20474@gmail.com',
     availability: 'Available for freelance & internships',
     resumeUrl: '/resume.pdf',
-    profileImage: '/images/moments/moments.jpeg',
+    profileImage: '/images/naman.jpeg',
     social: [
       { label: 'GitHub', url: 'https://github.com/naman20474-gif', icon: 'github' },
       {

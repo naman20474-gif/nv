@@ -1,6 +1,6 @@
 import { Home, Folder, User, FileText, Mail, Menu, X } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { portfolioData } from '@/data/portfolio'
 import { cn } from '@/lib/utils'
 
@@ -13,12 +13,20 @@ const NAV_LINKS = [
 export function Navbar({ onOpenResume }: { onOpenResume: () => void }) {
   const { personal } = portfolioData
   const [menuOpen, setMenuOpen] = useState(false)
+  const [sidebarMounted, setSidebarMounted] = useState(false)
   const location = useLocation()
+
+  // Mount sidebar after initial render for animation
+  useEffect(() => {
+    setSidebarMounted(true)
+  }, [])
 
   const isActive = (href: string) => {
     if (href === '/') return location.pathname === '/'
     return location.pathname === href
   }
+
+  const closeMenu = () => setMenuOpen(false)
 
   return (
     <>
@@ -76,25 +84,28 @@ export function Navbar({ onOpenResume }: { onOpenResume: () => void }) {
         </div>
       </header>
 
-      {/* Mobile sidebar */}
-      {menuOpen && (
+      {/* Mobile sidebar - always mounted for animation */}
+      {sidebarMounted && (
         <>
           <div
-            className="mobile-overlay"
-            onClick={() => setMenuOpen(false)}
+            className={cn('mobile-overlay', menuOpen && 'is-open')}
+            onClick={closeMenu}
             aria-hidden="true"
           />
-          <aside className="mobile-sidebar" aria-label="Navigation menu">
+          <aside
+            className={cn('mobile-sidebar', menuOpen && 'is-open')}
+            aria-label="Navigation menu"
+          >
             <div className="mobile-header">
-              <div className="brand">
-                <span className="brand-dot" aria-hidden="true" />
+              <div className="mobile-brand">
+                <span className="mobile-brand-dot" aria-hidden="true" />
                 <span className="brand-text-mobile">naman.dev</span>
               </div>
               <button
                 type="button"
                 className="btn-close"
                 aria-label="Close navigation menu"
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
               >
                 <X size={22} />
               </button>
@@ -107,7 +118,7 @@ export function Navbar({ onOpenResume }: { onOpenResume: () => void }) {
                   <a
                     key={href}
                     href={scrollTo ? `${href}#${scrollTo}` : href}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={closeMenu}
                     className={cn('mobile-link', active && 'mobile-link-active')}
                   >
                     <Icon size={20} className="mobile-nav-icon" aria-hidden="true" />
@@ -122,7 +133,7 @@ export function Navbar({ onOpenResume }: { onOpenResume: () => void }) {
                 type="button"
                 className="btn-resume-mobile"
                 onClick={() => {
-                  setMenuOpen(false)
+                  closeMenu()
                   onOpenResume()
                 }}
               >
