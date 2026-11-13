@@ -12,9 +12,21 @@ out/
 
 # Environment variables and secrets
 .env
+.env.local
+.env.*.local
 .env.*
 !.env.example
 *.local
+
+# Cache and temporary files
+.cache/
+*.cache/
+.eslintcache
+.parcel-cache/
+tmp/
+temp/
+*.tmp
+*.temp
 
 # Logs
 logs/
