@@ -1284,11 +1284,11 @@
 
   .story-highlights {
     grid-template-columns: 1fr;
-    gap: 16px.
+    gap: 16px;
   }
 
   .highlight-item {
-    padding: 16px.
+    padding: 16px;
   }
 
   .experience-section,
@@ -1296,82 +1296,109 @@
   .tech-stack-section,
   .philosophy-section,
   .contact-section {
-    padding-top: 48px.
-    padding-bottom: 64px.
+    padding-top: 48px;
+    padding-bottom: 64px;
   }
 
   .section-title {
-    font-size: clamp(26px, 5vw, 32px).
+    font-size: clamp(26px, 5vw, 32px);
   }
 
   .experience-cards,
   .education-cards,
   .stack-cards,
   .philosophy-cards {
-    grid-template-columns: 1fr.
-    gap: 20px.
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .experience-card {
-    padding: 24px.
+    padding: 24px;
   }
 
   .experience-card-header {
-    gap: 16px.
+    gap: 16px;
   }
 
   .experience-year {
-    font-size: 1.25rem.
+    font-size: 1.25rem;
   }
 
   .education-card {
-    padding: 24px.
-    flex-direction: column.
-    align-items: flex-start.
-    gap: 16px.
+    padding: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
   }
 
   .education-card-icon {
-    width: 48px.
-    height: 48px.
+    width: 48px;
+    height: 48px;
   }
 
   .stack-card {
-    padding: 24px.
+    padding: 24px;
   }
 
   .philosophy-card {
-    padding: 24px.
-    min-height: auto.
+    padding: 24px;
+    min-height: auto;
   }
 
   .philosophy-number {
-    font-size: 2rem.
+    font-size: 2rem;
   }
 
   .contact-card {
-    padding: 40px 24px.
-    border-radius: 16px.
+    padding: 40px 24px;
+    border-radius: 16px;
   }
 
   .contact-actions {
-    flex-direction: column.
-    align-items: center.
+    flex-direction: column;
+    align-items: center;
   }
 
   .contact-actions .btn {
-    width: 100%.
-    justify-content: center.
+    width: 100%;
+    justify-content: center;
   }
 
   .form-row {
-    grid-template-columns: 1fr.
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 480px) {
   .about-hero-card {
     padding: 24px 20px;
+  }
+
+  .about-hero-image-container {
+    max-width: 280px;
+  }
+
+  .about-hero-name {
+    font-size: clamp(32px, 10vw, 40px);
+    -webkit-text-stroke: 1px rgba(23, 23, 23, 0.15);
+  }
+
+  .about-hero-role {
+    font-size: clamp(14px, 4vw, 16px);
+  }
+
+  .about-hero-description p {
+    font-size: clamp(15px, 4vw, 17px);
+  }
+
+  .about-hero-actions {
+    gap: 12px;
+  }
+
+  .about-hero-actions .btn {
+    padding: 0 1.25rem;
+    font-size: 14px;
+    height: 48px;
   }
 
   .story-card {
@@ -1387,6 +1414,23 @@
 
   .contact-card {
     padding: 32px 20px;
+  }
+
+  .contact-title {
+    font-size: clamp(26px, 7vw, 32px);
+  }
+
+  .section-title {
+    font-size: clamp(22px, 6vw, 28px);
+  }
+
+  .stack-items {
+    gap: 8px;
+  }
+
+  .stack-item {
+    font-size: 0.75rem;
+    padding: 6px 12px;
   }
 }
 
